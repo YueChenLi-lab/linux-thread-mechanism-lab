@@ -1,0 +1,12 @@
+main pid=57 tid=57; expected: 4 live kernel tasks
+inspect /proc/self/task (including main)
+procfs_tid=1341
+procfs_tid=1342
+procfs_tid=1343
+procfs_tid=1344
+kernel_task_count=4 expected=4
+worker=0 pid=57 tid=58 shared_addr=0x565519a6e010 stack_addr=0x7fb6d839ee7c tls_addr=0x7fb6d839f6bc tls=100
+worker=1 pid=57 tid=59 shared_addr=0x565519a6e010 stack_addr=0x7fb6d7b9de7c tls_addr=0x7fb6d7b9e6bc tls=101
+worker=2 pid=57 tid=60 shared_addr=0x565519a6e010 stack_addr=0x7fb6d739ce7c tls_addr=0x7fb6d739d6bc tls=102
+sleeping_worker_woke heartbeat=20
+final heartbeat=20 expected=20
