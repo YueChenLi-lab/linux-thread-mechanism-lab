@@ -3,7 +3,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 UPSTREAM="$ROOT/.work/hit-os"
 LAB="$ROOT/.work/lab"
-if [ -z "$OSLAB" ]; then
+if [ -z "${OSLAB:-}" ]; then
   echo 'Set OSLAB to local course oslab resources first.' >&2; exit 2
 fi
 [ -f "$UPSTREAM/scripts/run.sh" ] || { echo 'Run scripts/bootstrap.sh first.' >&2; exit 2; }
@@ -25,7 +25,7 @@ fi
 OUT="$ROOT/.work/guest-$(date +%Y%m%d-%H%M%S)"
 [ ! -e "$OUT" ] || { echo "Refusing to overwrite $OUT" >&2; exit 2; }
 mkdir -p "$OUT"
-( cd "$UPSTREAM" && REPO="$UPSTREAM" LAB="$LAB" OSLAB="$OSLAB" bash scripts/run.sh 03 160 ) | tee "$OUT/run.log"
+( cd "$UPSTREAM" && REPO="$UPSTREAM" LAB="$LAB" OSLAB="${OSLAB:-}" bash scripts/run.sh 03 160 ) | tee "$OUT/run.log"
 [ -s "$UPSTREAM/results/03.png" ] || { echo 'Missing Bochs screenshot.' >&2; exit 1; }
 [ -s "$UPSTREAM/results/03__var_process.log" ] || { echo 'Missing guest process.log.' >&2; exit 1; }
 cp "$UPSTREAM/results/03.png" "$OUT/linux011-bochs.png"
