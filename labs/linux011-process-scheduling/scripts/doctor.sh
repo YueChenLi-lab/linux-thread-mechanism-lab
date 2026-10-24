@@ -9,7 +9,7 @@ for bin in git python3 gcc make as86 ld86 gcc-3.4 bochs Xvfb import; do
     printf '[MISSING] %s\n' "$bin"
   fi
 done
-if [ -n "$OSLAB" ]; then
+if [ -n "${OSLAB:-}" ]; then
   for name in hdc-0.11.img bochs/BIOS-bochs-latest bochs/vgabios.bin; do
     if [ -f "$OSLAB/$name" ]; then echo "[OK] $OSLAB/$name";
     else echo "[MISSING] $OSLAB/$name"; fi
